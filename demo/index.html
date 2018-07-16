@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>demo</title>
+<style>
+head{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+body{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: "Microsoft YaHei";
+  -webkit-text-size-adjust: 100%;
+}  
+.fileup{
+  position:absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    filter:alpha(opacity=0);
+    width: 82px;
+    height: 34px;
+    overflow:hidden;
+}
+.fileup input{
+    width: 82px;
+    height: 34px;
+    direction: rtl;
+} 
+</style>
+</head>
+<body>
+<div class="uploadFile" >上传文件</div>
+<script src="./jquery.js" type="text/javascript"></script>
+<script src="../uploadFile.js" type="text/javascript"></script>
+<script>
+var uploadFile = $(".uploadFile").uploadFile({
+  size: 10 * 1024 * 1024,
+  uploadType: 'all',
+  other: function (up, name) {
+    up.submit()
+    console.log(up)
+  },
+  callback: function (url, time, key, originPath) {
+    console.log(url)
+  },
+  error: function (type, errorMsg) {
+    if (errorMsg) {
+      console.log({type: 'error', id: 'uploaderType', message: errorMsg, hideAfter: 2})
+    }
+    if (type == 'type') {
+      console.log({type: 'error', id: 'uploaderType', message: '文件格式不正确，仅支持传图片（png、jpg、jpeg、bmp为后缀的图片）、Word（.doc、.docx）、Excel（.xls、.xlsx）、PDF（.pdf）、txt', hideAfter: 2})
+    } else if (type == 'size') {
+      console.log({type: 'error', id: 'uploaderType', message: '仅支持上传10M以内的文件', hideAfter: 2})
+    } else {
+      console.log({type: 'error', id: 'uploaderType', message: '上传的文件格式错误', hideAfter: 2})
+    }
+  }
+});
+</script>
+</body>
+</html>

@@ -947,6 +947,7 @@
 				uploadType: "all",
 				size: 0,
 				inputImage: false,
+				url: '',
 				callback: function(url) {},
 				error: function(type) {}
 			}, this.options = $.extend({}, this.defaults, options);
@@ -971,7 +972,7 @@
 			if (up.$el.find(".fileup").length > 0) {
 				up.$el.find(".fileup").remove();
 			};
-			var url = "/any800/echatManager.do?method=uploadFile&fromType=client";
+			var url = up.options.url || "/any800/echatManager.do?method=uploadFile&fromType=client";
 			var t = "*/*"
 			if (up.options.inputImage) t = "image/*";
 			var str = '<form class="fileup" contentType="text/html"   method="post"  enctype="multipart/form-data" action="' + url + '"><input multiple="false" type="file" name="uploadField" accept="' + t + '" /></form>';
